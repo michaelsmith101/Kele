@@ -43,5 +43,16 @@ require './lib/roadmap'
                 "stripped-text": "Test Body"}, 
             headers: { "authorization" => @auth_token }) 
     end
+    
+    def create_submission(checkpoint_id, assignment_branch = nil, assignment_commit_link = nil, comment = nil)
+       response = self.class.post("#{@base_uri}/messages", 
+            body: {
+                "assignment_branch": assignment_branch,
+                "assignment_commit_link": assignment_commit_link,
+                "checkpoint_id": checkpoint_id,
+                "comment":comment,
+                "enrollment_id":34441 }, 
+            headers: { "authorization" => @auth_token }) 
+    end
 
 end
