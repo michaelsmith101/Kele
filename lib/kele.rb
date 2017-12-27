@@ -25,13 +25,23 @@ require './lib/roadmap'
     def get_messages(page_number = nil)
         
         if page_number.nil? then 
-            @page_number = ''
+            page_url = ''
         else
-            @page_number = "?page=#{page_number}"
+            page_url = "?page=#{page_number}"
         end
         
-        response = self.class.get("#{@base_uri}/message_threads#{@page_number}", headers: { "authorization" => @auth_token })
+        response = self.class.get("#{@base_uri}/message_threads#{page_url}", headers: { "authorization" => @auth_token })
         JSON.parse(response.body)
     end
     
+    def create_message
+       response = self.class.post("#{@base_uri}/messages", 
+            body: {
+                "sender": "michaelsmith101@gmail.com",
+                "recipient_id": 2384373,
+                "subject": "Test Subject", 
+                "stripped-text": "Test Body"}, 
+            headers: { "authorization" => @auth_token }) 
+    end
+
 end
