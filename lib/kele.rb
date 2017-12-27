@@ -1,7 +1,7 @@
-class Kele
-    
 require 'httparty'
 require './lib/roadmap'
+
+class Kele
 
     include HTTParty
     include Roadmap
