@@ -10,4 +10,9 @@ require 'httparty'
          @auth_token = response["auth_token"]
     end
     
+    def get_me
+       response = self.class.get("#{@base_uri}/users/me", headers: { "authorization" => @auth_token })
+       JSON.parse(response.body)
+    end
+    
 end
