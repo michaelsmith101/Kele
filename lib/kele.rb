@@ -22,4 +22,16 @@ require './lib/roadmap'
         JSON.parse(response.body)
     end
     
+    def get_messages(page_number = nil)
+        
+        if page_number.nil? then 
+            @page_number = ''
+        else
+            @page_number = "?page=#{page_number}"
+        end
+        
+        response = self.class.get("#{@base_uri}/message_threads#{@page_number}", headers: { "authorization" => @auth_token })
+        JSON.parse(response.body)
+    end
+    
 end
